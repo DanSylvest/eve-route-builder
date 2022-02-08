@@ -1,0 +1,80 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`graph add systems 1`] = `
+Graph {
+  "additionalConnections": Object {},
+  "systems": Object {
+    "100": Object {
+      "neighbors": Array [],
+      "security": 1,
+    },
+    "1000": Object {
+      "neighbors": Array [],
+      "security": 1,
+    },
+    "101": Object {
+      "neighbors": Array [],
+      "security": 1,
+    },
+    "102": Object {
+      "neighbors": Array [],
+      "security": 1,
+    },
+  },
+}
+`;
+
+exports[`graph merge with additional connections 1`] = `
+Graph {
+  "additionalConnections": Object {
+    "100": Array [
+      1000,
+    ],
+    "1000": Array [
+      100,
+    ],
+  },
+  "systems": Object {
+    "100": Object {
+      "neighbors": Array [],
+      "security": 1,
+    },
+    "1000": Object {
+      "neighbors": Array [],
+      "security": 1,
+    },
+    "101": Object {
+      "neighbors": Array [],
+      "security": 1,
+    },
+    "102": Object {
+      "neighbors": Array [],
+      "security": 1,
+    },
+  },
+}
+`;
+
+exports[`graph should copy 1`] = `
+Graph {
+  "additionalConnections": Object {},
+  "systems": Object {
+    "100": Object {
+      "neighbors": Array [],
+      "security": 1,
+    },
+    "1000": Object {
+      "neighbors": Array [],
+      "security": 1,
+    },
+    "101": Object {
+      "neighbors": Array [],
+      "security": 1,
+    },
+    "102": Object {
+      "neighbors": Array [],
+      "security": 1,
+    },
+  },
+}
+`;
