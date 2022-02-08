@@ -61,4 +61,4 @@ const J212812 = 31001180;
 
 ## License
 
-Nest is [MIT licensed](LICENSE).
+[MIT licensed](LICENSE).
