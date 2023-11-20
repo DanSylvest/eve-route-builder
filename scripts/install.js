@@ -3,7 +3,7 @@ const csvtojson = require('csvtojson');
 const { Graph } = require('./graph');
 
 const load = async (name) => {
-  const text = fs.readFileSync(`${__dirname}/../input/${name}.csv`, 'utf8');
+  const text = fs.readFileSync(`${__dirname}/../eveData/${name}.csv`, 'utf8');
   return await csvtojson().fromString(text);
 };
 
