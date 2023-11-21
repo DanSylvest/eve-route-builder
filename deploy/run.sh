@@ -2,14 +2,15 @@ echo 'Start installing route-builder';
 
 ROOT=$(pwd);
 
-LOCKFILE="lockfile_client"
+echo 'Install nestjs'
+npm i -g @nestjs/cli
 
 echo '_____________ INITIAL FOLDER STATE _____________'
 ls -al
 echo '_____________ INITIAL FOLDER STATE _____________'
 
 echo "Download latest eve systems and routes";
-if [ -d "$ROOT/eveData" ]; then
+if [ ! -d "$ROOT/eveData" ]; then
   mkdir -p "$ROOT/eveData";
 fi
 
@@ -32,4 +33,9 @@ echo " _____________ DUMP ----------------"
 
 cd "$ROOT" || exit;
 
+echo '_____________ BUILDER INSTALL NPM START _____________'
+npm install;
+echo '_____________ BUILDER INSTALL NPM FINISH _____________'
+
+echo '_____________ INSTALL NPM FINISH _____________'
 npm run start:dev

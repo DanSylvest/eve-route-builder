@@ -22,8 +22,26 @@ export class RouteService {
     return this.graph.checkSystem(system);
   }
 
-  route(origin: number, destination: number, type: SearchFlag, connections?: number[][]) {
-    const g = connections ? this.graph.mergeWith(connections) : this.graph;
+  route(
+    origin: number,
+    destination: number,
+    type: SearchFlag,
+    connections?: number[][],
+    avoid?: number[]
+  ) {
+    if (avoid && avoid.includes(origin) || avoid.includes(destination)) {
+      return [];
+    }
+
+    const g = this.graph.copy();
+
+    if (connections) {
+      g.mergeWith(connections);
+    }
+
+    if (avoid) {
+      avoid.forEach(sys => g.avoidSystem(sys));
+    }
 
     return dijkstra(g, origin, destination, type).map((x) => parseInt(x));
   }

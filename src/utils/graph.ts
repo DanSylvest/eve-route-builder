@@ -6,6 +6,7 @@ type System = {
 export class Graph {
   protected systems: { [index: number]: System } = {};
   protected additionalConnections: { [index: number]: number[] } = {};
+  protected avoidSystems: Set<number> = new Set();
 
   addSystem(system: number, security: number, neighbors: number[] = []) {
     this.systems[system] = { neighbors, security };
@@ -43,7 +44,15 @@ export class Graph {
     }
   }
 
+  avoidSystem(system: number) {
+    this.avoidSystems.add(system);
+  }
+
   neighbors(system) {
+    if(this.avoidSystems.has(system)) {
+      return [];
+    }
+
     const additionalNeighbors = this.additionalConnections[system];
 
     if (additionalNeighbors) {

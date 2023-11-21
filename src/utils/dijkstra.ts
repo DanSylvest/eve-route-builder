@@ -1,4 +1,5 @@
 import { Fibonacci_heap } from './fibonacci_heap';
+import { Graph } from "./graph";
 
 const prefer_shortest = () => {
   return 1;
@@ -45,7 +46,7 @@ const COST_FN = {
 };
 
 export type SearchFlag = 'secure' | 'insecure' | 'shortest';
-export const dijkstra = (graph, start: number, end: number, flag: SearchFlag = 'shortest') => {
+export const dijkstra = (graph: Graph, start: number, end: number, flag: SearchFlag = 'shortest') => {
   const prev = {};
   const costs = {};
   const entry = {};
