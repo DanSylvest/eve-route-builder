@@ -12,21 +12,23 @@ export class RouteController {
     @Param('origin') origin: string,
     @Param('destination') destination: string,
     @Body('flag') flag: SearchFlag,
-    @Body('connections') connections?: number[][],
+    @Body('connections') connections?: string[],
     @Body('avoid') avoid?: number[],
   ): number[] | string {
     if (!this.routeService.checkSystemExists(parseInt(origin))) {
-      return `Origin solar system - ${origin} is not exists.`;
+      return `Origin solar system - ${ origin } is not exists.`;
     }
 
     if (!this.routeService.checkSystemExists(parseInt(destination))) {
-      return `Destination solar system - ${destination} is not exists.`;
+      return `Destination solar system - ${ destination } is not exists.`;
     }
 
     if (!SEARCH_TYPES.includes(flag)) {
-      return `Route flag is incorrect ${flag} - type should be one of (${SEARCH_TYPES.join('/')}).`;
+      return `Route flag is incorrect ${ flag } - type should be one of (${ SEARCH_TYPES.join('/') }).`;
     }
 
-    return this.routeService.route(parseInt(origin), parseInt(destination), flag, connections, avoid);
+    const parsedConnections = connections.map(x => x.split('|').map(x => parseInt(x)));
+
+    return this.routeService.route(parseInt(origin), parseInt(destination), flag, parsedConnections, avoid);
   }
 }

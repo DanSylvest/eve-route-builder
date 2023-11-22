@@ -36,7 +36,7 @@ export class RouteService {
     const g = this.graph.copy();
 
     if (connections) {
-      g.mergeWith(connections);
+      connections.forEach(([origin, target]) => g.addAdditionalChain(origin, target));
     }
 
     if (avoid) {
