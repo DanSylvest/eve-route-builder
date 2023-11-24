@@ -2,6 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { Graph } from '../utils/graph';
 import graphJson from '../assets/graph.json';
 import { dijkstra, SearchFlag } from '../utils/dijkstra';
+import additionalRoutes from './../assets/additionalRoutes.json';
+import { AdditionalSystem } from "../types";
 
 @Injectable()
 export class RouteService {
@@ -16,6 +18,11 @@ export class RouteService {
       const { neighbors, security } = graphJson[key];
       this.graph.addSystem(parseInt(key), security, neighbors);
     }
+
+    (additionalRoutes as AdditionalSystem[]).forEach(sys => {
+      this.graph.addSystem(sys.systemId, sys.security, []);
+      sys.neighbors.forEach(n => this.graph.addChain(sys.systemId, n));
+    });
   }
 
   checkSystemExists(system: number) {

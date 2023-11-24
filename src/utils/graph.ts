@@ -49,7 +49,7 @@ export class Graph {
   }
 
   neighbors(system) {
-    if(this.avoidSystems.has(system)) {
+    if (this.avoidSystems.has(system)) {
       return [];
     }
 
