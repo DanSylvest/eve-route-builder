@@ -16,8 +16,7 @@ fi
 
 
 cd "$ROOT/eveData" || exit;
-rm -rf .
-
+rm -f *
 
 latestURLSystems='https://www.fuzzwork.co.uk/dump/latest/mapSolarSystems.csv';
 latestURLJumps='https://www.fuzzwork.co.uk/dump/latest/mapSolarSystemJumps.csv';
