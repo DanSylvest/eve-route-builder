@@ -37,4 +37,4 @@ npm install;
 echo '_____________ BUILDER INSTALL NPM FINISH _____________'
 
 echo '_____________ INSTALL NPM FINISH _____________'
-npm run start:prod
+npm run start:debug
