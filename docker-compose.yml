@@ -4,4 +4,4 @@ services:
     container_name: eve-route-builder
     restart: always
     ports:
-      - "2001:2001"
+      - '2001:2001'
