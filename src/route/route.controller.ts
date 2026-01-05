@@ -59,4 +59,33 @@ export class RouteController {
       type: flag,
     });
   }
+
+  @Post('/findClosest')
+  findClosest(
+    @Body('origin') origin: number,
+    @Body('destinations') destinations: number[],
+    @Body('flag') flag: SearchFlag,
+    @Body('connections') connections?: string[],
+    @Body('avoid') avoid?: number[],
+    @Body('count') count?: number,
+  ): RouteResult[] | string {
+    if (!this.routeService.checkSystemExists(origin)) {
+      return `Origin solar system - ${origin} is not exists.`;
+    }
+
+    if (!SEARCH_TYPES.includes(flag)) {
+      return `Route flag is incorrect ${flag} - type should be one of (${SEARCH_TYPES.join('/')}).`;
+    }
+
+    const parsedConnections = connections.map((x) => x.split('|').map((x) => parseInt(x)));
+
+    return this.routeService.findClosest({
+      origin,
+      destinations,
+      connections: parsedConnections,
+      avoid,
+      type: flag,
+      count,
+    });
+  }
 }

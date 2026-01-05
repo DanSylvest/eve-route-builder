@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Graph } from '../utils/graph';
 import graphJson from '../assets/graph.json';
-import { dijkstra, SearchFlag } from '../utils/dijkstra';
+import { dijkstra, dijkstraMulti, SearchFlag } from '../utils/dijkstra';
 import additionalRoutes from './../assets/additionalRoutes.json';
 import { AdditionalSystem } from '../types';
 
@@ -11,6 +11,15 @@ type RoutesProps = {
   type: SearchFlag;
   connections?: number[][];
   avoid?: number[];
+};
+
+type Routes2Props = {
+  origin: number;
+  destinations: number[];
+  type: SearchFlag;
+  connections?: number[][];
+  avoid?: number[];
+  count?: number;
 };
 
 @Injectable()
@@ -69,5 +78,24 @@ export class RouteService {
         systems: this.route(parseInt(origin), parseInt(x), type, connections, avoid),
       };
     });
+  }
+
+  findClosest({ origin, destinations, type, connections, avoid, count }: Routes2Props) {
+    const g = this.graph.copy();
+
+    if (connections) {
+      connections.forEach(([origin, target]) => g.addAdditionalChain(origin, target));
+    }
+
+    if (avoid) {
+      avoid.forEach((sys) => g.avoidSystem(sys));
+    }
+
+    let exitCondition;
+    if (count != null && count > 0) {
+      exitCondition = ({ foundTargets }) => foundTargets.size == count;
+    }
+
+    return dijkstraMulti(g, origin, destinations, type, exitCondition);
   }
 }

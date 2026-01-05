@@ -11,3 +11,4 @@ export type Route = {
 };
 
 export type RouteResult = { systems: number[]; success: boolean } & Route;
+export type StopCondition = (args: { ends: number[]; foundTargets: Set<number>; current?: number }) => boolean;
